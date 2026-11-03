@@ -1,9 +1,1 @@
-    Checking serde_core v1.0.229
-    Checking zmij v1.0.23
-    Checking getrandom v0.4.3
-    Checking uuid v1.29.0
-    Checking serde_json v1.0.154
-    Checking serde v1.0.229
-    Checking a02-rust-intermediate v0.1.0 (/Users/hyoungdonju/Repos/github/course-rust-for-webdev/a02-rust-intermediate)
-    Checking rust-beginner v0.1.0 (/Users/hyoungdonju/Repos/github/course-rust-for-webdev/a01-rust-beginner)
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.66s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.04s

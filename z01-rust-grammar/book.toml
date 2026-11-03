@@ -1,4 +1,11 @@
 [book]
-title = "Rust Grammar"
+title = "Rust 프로그래밍"
 authors = ["코딩하는오후"]
-language = "en"
+language = "ko"
+
+[output.html]
+no-section-label=true
+
+[output.html.fold]
+enable = true
+level = 1
