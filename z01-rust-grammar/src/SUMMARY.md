@@ -1,6 +1,6 @@
 # SUMMARY
 
-- [과정 소개](./README.md)
+- [과정 소개](../README.md)
 
 - [1부 시작하기](./rust-beginers/part_intro.md)
     - [개발환경 구성](./rust-beginers/chapter_01.md)
