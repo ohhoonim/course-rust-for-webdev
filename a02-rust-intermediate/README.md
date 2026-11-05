@@ -1,3 +1,26 @@
-# Rust 프로그래밍 2부 프로젝트 실전
+# [2부] 활용하기: 백엔드 아키텍처와 실무 적용
 
-- 프로젝트를 구성하고 실전 코딩시 필요한 기법 연습
+- 1장. Modules, Crates and Project Organization
+    - 목표: 대규모 백엔드 서비스를 위한 모듈화 구조 설계.
+    - 핵심 내용: `mod` 계층 구조, `pub` 접근제어자, 쿼드런트 기반 카고 워크스페이스(Workspace) 설계.
+- 2장. Iterators & Closures
+    - 목표: Zero-cost Abstraction 기반의 함수형 데이터 처리.
+    - 핵심 내용: 클로저의 환경 캡처 (`move`), `Iterator` 트레이트 및 체이닝 메서드 최적화.
+- 3장. Lifetimes
+    - 목표: 댕글링 포인터 방지 및 참조자 유효 범위 정의.
+    - 핵심 내용: 라이프타임 명시법 (`'a`), 엘리전(Elision) 규칙, 구조체 내 참조자 저장 시 유의점.
+- 4장. Smart Pointers: Box, Rc, RefCell
+    - 목표: 힙 메모리 직접 제어 및 런타임 빌림 규칙 활용.
+    - 핵심 내용: `Box<T>`를 통한 동적 크기 타입 관리, `Rc<T>` 공유 소유권, `RefCell<T>` 내부 가변성 패턴.
+- 5장. Advanced Traits
+    - 목표: 고급 추상화 기법 적용.
+    - 핵심 내용: 연관 타입(Associated Types), 연산자 오버로딩, 동적 디스패치(`trait object`, `dyn`).
+- 6장. Error Handling
+    - 목표: 프로덕션급 에러 파이프라인 구축.
+    - 핵심 내용: `?` 연산자를 활용한 에러 전파, 커스텀 에러 타입 설계, `thiserror` 및 `anyhow` 실무 적용.
+- 7장. Serde: Serialization/Deserialization
+    - 목표: 웹 API 페이로드 파싱 및 데이터 변환.
+    - 핵심 내용: JSON/BSON 매핑, `#[derive(Serialize, Deserialize)]`, 커스텀 변환 로직 및 속성 핸들링.
+- 8장. File I/O & Working with Paths
+    - 목표: 안전한 파일 시스템 및 경로 핸들링.
+    - 핵심 내용: `std::fs`, `std::path::PathBuf`, 비동기 I/O 대비 원자적 파일 작업.

@@ -1,4 +1,23 @@
-# Rust 프로그래밍 1부 시작하기
+# [1부] 시작하기: 컴파일 타임 안전성과 기본기 구축
 
-- 필수 문법과 Rust만의 특징을 이해
-- 예제 소스는 examples 폴더에 작성되어있습니다.
+- 1장. 개발환경 구성 & Chapter 02. Cargo 빌드 도구
+    - 목표: Rust toolchain (`rustup`, `rustc`, `cargo`) 환경 구축 및 프로젝트 Lifecycle 관리.
+    - 핵심 내용: `Cargo.toml` 매니페스트 관리, 릴리스 빌드 옵션과 최적화 수준, 웹 개발자를 위한 Cargo 명령어 워크플로우.
+- 3장. 변수와 가변성 & Chapter 04. 데이터 타입
+    - 목표: 메모리 할당 관점(스택 vs 히프)에서 데이터 표현 방식 이해.
+    - 핵심 내용: `let` vs `let mut`, Shadowing 기법, 스칼라/복합 타입, 메모리 레이아웃 기초.
+- 5장. 함수 & Chapter 06. 제어 흐름
+    - 목표: 식(Expression) 기반 언어로서의 Rust 특성 파악.
+    - 핵심 내용: 반환값과 문장(Statement)의 차이, `match` 구문을 활용한 완벽한 상태 제어.
+- 7장. 소유권(Ownership) & Chapter 08. Borrow와 References
+    - 목표: 가비지 컬렉터 없이 작동하는 메모리 관리 원리 체득.
+    - 핵심 내용: Move 세맨틱스, 가변/불변 참조자 규칙, NLL(Non-Lexical Lifetimes), 컴파일러 에러 메시지 분석.
+- 9장. 구조체(Structs) & Chapter 10. 열거형(Enums)
+    - 목표: 도메인 데이터 모델링 설계.
+    - 핵심 내용: Named/Tuple Structs, 튜플을 포함하는 강력한 Enum, 패턴 매칭을 통한 상태 안전성 확보.
+- 11장. Option과 Result & Chapter 12. Collections
+    - 목표: 런타임 NullPointer 및 예외 안전 구문 작성.
+    - 핵심 내용: `null` 대신 `Option<T>`, 예외 던지기 대신 `Result<T, E>`, `Vec`, `String`, `HashMap` 고성능 활용.
+- 13장. Trait & Generic
+    - 목표: 다형성 및 재사용 가능한 추상화 레이어 설계.
+    - 핵심 내용: Generic 타입 매개변수, Trait 정의 및 구현, Trait Bound를 통한 정적 디스패치 최적화.
