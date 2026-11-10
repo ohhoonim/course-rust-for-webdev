@@ -83,7 +83,7 @@ let matthew = User {
 matthew.describe();
 ```
 
-💡
+
 
 ## self vs Self
 
