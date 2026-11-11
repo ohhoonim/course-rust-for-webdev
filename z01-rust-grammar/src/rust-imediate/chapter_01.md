@@ -4,6 +4,10 @@
 
 모듈, 크레이트, 워크스페이스를 이해하고 프로젝트를 적절히 구성한다.
 
+## 강의 영상
+
+- 유튜브: [웹 프로그래밍 개발자를 위한 Rust - 2부 활용하기 (Modules, Cates and Project Organization ️)](https://youtu.be/k1_wcfpJZWo)
+
 ## 상황: 모든 코드를 main() 함수에 넣을 수는 없다. 프로젝트내 파일들을 목적에 맞게 분리한다.
 
 1. ‘tactics-rust-warehouse’ 명으로 프로젝트를 생성하고 main.rc에 ‘Product’ stuct를 작성하기

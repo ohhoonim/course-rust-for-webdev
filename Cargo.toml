@@ -1,8 +1,9 @@
 [workspace]
 members = [
     "a01-rust-beginner",
-    "a02-rust-intermediate", 
+    "a02-rust-intermediate",
     "b01-leptos-csr",
+    "b02-leptos-ssr",
 ]
 resolver = "3"
 
