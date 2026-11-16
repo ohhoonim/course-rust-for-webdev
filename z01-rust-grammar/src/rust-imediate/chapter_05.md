@@ -14,6 +14,12 @@
     - `Display`, `Debug`를 구현해 `println!` 출력을 지원
     - `Drop`을 구현해 객체가 소멸할 때의 커스텀 정리 로직을 실행
 
+### 핵심 요약
+
+1. Trait Bound: 제네릭 타입이 특정 기능을 제공하도록 제한하는 것 (`T: Display`)
+2. Trait Object: 서로 다른 구체 타입을 공통 인터페이스로 다루는 것 (`dyn Display`)
+3. Trait Implementation: 특정 타입이 trait의 기능을 실제로 구현하는 것 (`impl Display for User`)
+
 ## 상황
 
 - 1. 공통 인터페이스 정의 및 다형성
