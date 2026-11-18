@@ -12,93 +12,182 @@
 
 주문(Order)을 생성하고 결제를 진행하는 과정에서 발생할 수 있는 다양한 예외 상황을 안전하게 처리하는 시스템을 구현합니다.
 
-- 상황 1 (재고 검증 - `Option` 활용): 장바구니에 담은 상품의 재고가 존재하지 않거나 품절된 경우, 데이터가 없음을 나타내는 `Option`을 활용해 예외를 처리합니다.
+- 상황 1 (재고 검증): 장바구니에 담은 상품의 재고가 존재하지 않거나 품절된 경우, 데이터가 없음을 나타내는 예외를 처리합니다.
 - 상황 2 (쿠폰 및 가격 검증 - `Result` 활용): 만료된 쿠폰을 적용하거나 보유 잔액보다 결제 금액이 큰 경우, 구체적인 에러 사유를 담은 `Result`를 반환합니다.
 - 상황 3 (에러 전파 - `?` 연산자 활용): 재고 확인 -> 쿠폰 검증 -> 결제 승인으로 이어진 복잡한 단계 중 어디에서든 에러가 발생하면 즉시 상위 함수로 에러를 전파하여 안전하게 거래를 중단시킵니다.
 
-## 힌트
+## (힌트) 도메인 구조체와 에러유형
+    
+```rust
+struct Product {
+    name: String,
+    stock: u32,
+    price: u32,
+}
 
-- 도메인 구조체
-    
-    ```rust
-    struct Product {
-        name: String,
-        stock: u32,
-        price: u32,
+struct User {
+    balance: u32,
+}
+
+enum ShopError {
+    OutOfStock(String), // 재고 없음
+    InvalidCoupon(String), // 잘못된 쿠폰
+    InsufficientFunds { required: u32, available: u32 }, // 잔액부족 
+}
+```
+
+## `match`, `if let`, `unwrap_or_else` 등 안전한 값 추출 패턴
+
+러스트에서 `Option<T>` 타입은 값이 존재할 수도 있고(`Some(T)`), 없을 수도 있음(`None`)을 안전하게 표현합니다. 프로그램이 `None`으로 인해 예기치 않게 다운(`panic`)되는 것을 방지하기 위해, 러스트는 다양한 **안전한 값 추출 패턴**을 제공한다.
+
+### `match` 문을 이용한 완전한 처리 (Exhaustive Matching)
+
+가장 원론적이면서도 안전한 방법입니다. `Some`과 `None`의 모든 경우를 컴파일러가 강제로 처리하게 하므로 누락이 발생하지 않습니다.
+
+```rust
+fn get_user_age(name: &str) -> Option<u32> {
+    if name == "Alice" {
+        Some(30)
+    } else {
+        None
     }
-    
-    struct User {
-        balance: u32,
+}
+
+fn main() {
+    let name = "Alice";
+
+    match get_user_age(name) {
+        Some(age) => println!("{}의 나이는 {}살입니다.", name, age),
+        None => println!("{}의 정보를 찾을 수 없습니다.", name),
     }
-    ```
-    
-- ? 연산자를 이용한 에러 전파
-    
-    러스트에서 `?` 연산자는 `Result`나 `Option` 타입을 반환하는 함수에서 에러나 값이 없을 때의 처리를 매우 간결하게 만들어 주는 에러 전파(Error Propagation) 문법 설탕(Syntactic Sugar)이다.
-    
-    장황한 `match` 문을 작성하는 대신, 에러가 발생했을 때 즉시 상위 호출자로 에러를 반환하는 코드를 한 글자로 압축한다.
-    
-    - 동작 방식
-        
-        `?` 연산자가 붙은 표현식의 결과는 다음과 같이 동작한다.
-        
-        1. 성공인 경우 (`Ok(T)` 또는 `Some(T)`):
-            - 에러나 None이 아니라면, 감싸져 있던 내부 값(`T`)을 꺼내어 변수에 대입하거나 그대로 진행한다.
-        2. 실패인 경우 (`Err(E)` 또는 `None`):
-            - 현재 함수의 실행을 즉시 중단하고, 해당 에러(`Err(E)`)를 현재 함수의 반환값으로 곧바로 리턴한다.
-    - 코드 비교: 없이 쓰기 vs `?` 연산자 사용
-        - 1. `?` 연산자가 없을 때 (`match` 문 사용)
-        
-        ```rust
-        fn parse_number(s: &str) -> Result<i32, std::num::ParseIntError> {
-            let parsed = match s.parse::<i32>() {
-                Ok(n) => n,
-                Err(e) => return Err(e), // 에러를 수동으로 반환
-            };
-            Ok(parsed * 2)
-        }
-        ```
-        
-        - 2. `?` 연산자를 사용할 때
-        
-        ```rust
-        fn parse_number(s: &str) -> Result<i32, std::num::ParseIntError> {
-            let parsed = s.parse::<i32>()?; // 에러가 나면 알아서 Err(e)를 리턴함
-            Ok(parsed * 2)
-        }
-        ```
-        
-    - 주의할 점: 에러 타입의 호환성
-        
-        `?` 연산자는 단순히 `return Err(e);`를 대신해 주는 것이 아니라, 반환하려는 에러 타입으로 자동 변환(`From` 트레이트)을 시도합니다.
-        
-        따라서 `?`를 사용하는 함수의 반환 타입(`Result<T, E_func>`)이 내부에서 호출하는 함수의 에러 타입(`E_inner`)을 수용할 수 있거나, `From` 구현을 통해 변환이 가능한 상태여야 컴파일 에러가 나지 않는다.
-        
-- panic!
-    
-    러스트에서 `panic!`은 프로그램이 더 이상 정상적으로 실행될 수 없는 복구 불가능한 에러(Unrecoverable Error)가 발생했을 때 사용한다.
-    
-    `panic!`이 호출되면 프로그램은 즉시 에러 메시지와 스택 추적(Backtrace) 정보를 출력하고 안전하게(또는 즉시) 종료한다.  `Result`가 "에러를 처리(복구)할 수 있는 경우"에 사용된다면, `panic!`은 "절대 일어나서는 안 되는 버그나 치명적인 상태"를 마주했을 때 발생시킨다.
-    
-    - 예제 코드
-    
-    ```rust
-    fn check_age(age: i32) {
-        if age < 0 {
-            // 프로그램이 유지될 수 없는 치명적인 상태이므로 패닉 발생
-            panic!("나이는 음수가 될 수 없습니다! 입력된 값: {}", age);
-        }
-        println!("나이 확인 완료: {}세", age);
+}
+```
+
+### `if let` 구문으로 간결하게 처리하기
+
+`Some`인 경우에만 관심이 있고 `None`일 때는 간단히 넘어가거나 무시하고 싶을 때 유용합니다. 코드가 훨씬 간결해집니다.
+
+```rust
+fn main() {
+    let config_max: Option<u32> = Some(300);
+
+    // config_max가 Some(max)일 때만 실행
+    if let Some(max) = config_max {
+        println!("최대 설정값이 {}로 지정되었습니다.", max);
+    } else {
+        println!("설정값이 없습니다.");
     }
-    
-    fn main() {
-        check_age(25); // 정상 작동
-    
-        // 이 코드가 실행되면 패닉이 발생하며 프로그램이 즉시 중단된다.
-        check_age(-5);
+}
+```
+
+### 기본값을 보장하는 `unwrap_or` / `unwrap_or_else`
+
+`None`일 경우 프로그램이 멈추는 위험한 `unwrap()` 대신, **기본값**을 대체하여 안전하게 값을 꺼내고 싶을 때 사용합니다.
+
+```rust
+fn main() {
+    let username: Option<String> = None;
+
+    // None일 경우 지정한 기본값("Guest")을 반환
+    let display_name = username.unwrap_or_else(|| String::from("Guest"));
+
+    println!("환영합니다, {}님!", display_name); // 출력: 환영합니다, Guest님!
+}
+```
+
+### 함수형 스타일의 조합자 (`map`, `and_then`)
+
+값을 직접 꺼내지 않고, `Option` 상태를 유지한 채 내부의 값만 안전하게 변환·조작
+
+```rust
+fn main() {
+    let age_str: Option<&str> = Some("25");
+
+    let age: Option<i32> = age_str.and_then(|s| s.parse().ok());
+
+    match age {
+        Some(n) => println!("파싱된 나이: {}", n),
+        None => println!("숫자로 변환할 수 없습니다."),
     }
-    ```
+}
+```
+
+## `?` 연산자를 이용한 에러 전파
     
+러스트에서 `?` 연산자는 `Result`나 `Option` 타입을 반환하는 함수에서 에러나 값이 없을 때의 처리를 매우 간결하게 만들어 주는 에러 전파(Error Propagation) 문법 설탕(Syntactic Sugar)이다.
+
+장황한 `match` 문을 작성하는 대신, 에러가 발생했을 때 즉시 상위 호출자로 에러를 반환하는 코드를 한 글자로 압축한다.
+
+### 동작 방식
+    
+`?` 연산자가 붙은 표현식의 결과는 다음과 같이 동작한다.
+
+1. 성공인 경우 (`Ok(T)` 또는 `Some(T)`):
+    - 에러나 None이 아니라면, 감싸져 있던 내부 값(`T`)을 꺼내어 변수에 대입하거나 그대로 진행한다.
+2. 실패인 경우 (`Err(E)` 또는 `None`):
+        - 현재 함수의 실행을 즉시 중단하고, 해당 에러(`Err(E)`)를 현재 함수의 반환값으로 곧바로 리턴한다.
+
+### 코드 비교: 없이 쓰기 vs `?` 연산자 사용
+- `?` 연산자가 없을 때 (`match` 문 사용)
+
+```rust
+fn parse_number(s: &str) -> Result<i32, std::num::ParseIntError> {
+    let parsed = match s.parse::<i32>() {
+        Ok(n) => n,
+        Err(e) => return Err(e), // 에러를 수동으로 반환
+    };
+    Ok(parsed * 2)
+}
+```
+
+- `?` 연산자를 사용할 때
+
+```rust
+fn parse_number(s: &str) -> Result<i32, std::num::ParseIntError> {
+    let parsed = s.parse::<i32>()?; // 에러가 나면 알아서 Err(e)를 리턴함
+    Ok(parsed * 2)
+}
+```
+    
+### 주의할 점: 에러 타입의 호환성
+    
+`?` 연산자는 단순히 `return Err(e);`를 대신해 주는 것이 아니라, 반환하려는 에러 타입으로 자동 변환(`From` 트레이트)을 시도합니다.
+
+따라서 `?`를 사용하는 함수의 반환 타입(`Result<T, E_func>`)이 내부에서 호출하는 함수의 에러 타입(`E_inner`)을 수용할 수 있거나, `From` 구현을 통해 변환이 가능한 상태여야 컴파일 에러가 나지 않는다.
+        
+## panic!
+    
+러스트에서 `panic!`은 프로그램이 더 이상 정상적으로 실행될 수 없는 복구 불가능한 에러(Unrecoverable Error)가 발생했을 때 사용한다.
+
+`panic!`이 호출되면 프로그램은 즉시 에러 메시지와 스택 추적(Backtrace) 정보를 출력하고 안전하게(또는 즉시) 종료한다.  `Result`가 "에러를 처리(복구)할 수 있는 경우"에 사용된다면, `panic!`은 "절대 일어나서는 안 되는 버그나 치명적인 상태"를 마주했을 때 발생시킨다.
+
+- 예제 코드
+
+```rust
+fn check_age(age: i32) {
+    if age < 0 {
+        // 프로그램이 유지될 수 없는 치명적인 상태이므로 패닉 발생
+        panic!("나이는 음수가 될 수 없습니다! 입력된 값: {}", age);
+    }
+    println!("나이 확인 완료: {}세", age);
+}
+
+fn main() {
+    check_age(25); // 정상 작동
+
+    // 이 코드가 실행되면 패닉이 발생하며 프로그램이 즉시 중단된다.
+    check_age(-5);
+}
+```
+
+## `std::error::Error` 트레이(Trait) 
+
+- 러스트에서 에러 타입은 `Debug`와 `Display` 트레이만 만족한다면, `std::error::Error`를 구현하지 않아도 `Result`의 에러 타입으로 인정 된다.
+- 에러 타입에 `Debug`와 `Display`를 구현한 뒤, `impl Error for YourError {}`를 선언. 기본구현이 정의되어있으므로 본문 내용을 비워도 된다.
+- std::error::Error 트레이를 구현하는 이유
+    - `anyhow`나 `dyn Error`와의 호환성: **`std::error::Error` 트레이가 구현된 타입들만** 모아서 처리할 수 있다.
+    - **에러 체이닝(Error Chaining) 지원**: 하위 함수에서 발생한 원인(Cause/Source) 에러를 상위 에러에 연결(`source()` 메서드)하여 추적할 수 있는 표준 인터페이스를 제공
+
 
 ## 결과
 
