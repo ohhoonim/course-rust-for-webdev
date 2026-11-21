@@ -1,8 +1,10 @@
 # SUMMARY
 
-- [과정 소개](../README.md)
+- [과정 소개](./intro.md)
 
-- [1부 시작하기](./rust-beginers/part_intro.md)
+---
+
+- [Rust 1부 시작하기](./rust-beginers/part_intro.md)
     - [개발환경 구성](./rust-beginers/chapter_01.md)
     - [Cargo 빌드 도구로 프로젝트 생성하기](./rust-beginers/chapter_02.md)
     - [변수와 가변성](./rust-beginers/chapter_03.md)
@@ -17,7 +19,7 @@
     - [Collections: Vec, String, HashMap](./rust-beginers/chapter_12.md)
     - [Trait & Generic](./rust-beginers/chapter_13.md)
 
-- [2부 활용하기](./rust-imediate/part_intro.md) 
+- [Rust 2부 활용하기](./rust-imediate/part_intro.md) 
     - [Modules, Cates and Project Organization](./rust-imediate/chapter_01.md)
     - [Iterators & Closures](./rust-imediate/chapter_02.md)
     - [Lifetimes](./rust-imediate/chapter_03.md)
@@ -26,3 +28,11 @@
     - [Error Handling](./rust-imediate/chapter_06.md)
     - [Serde: Serialization/Deserialization](./rust-imediate/chapter_07.md)
     - [File I/O & Working with Paths](./rust-imediate/chapter_08.md)
+
+---
+
+- [Leptos-CSR 1부 시작하기](./leptos-beginers/part_intro.md)
+    - [Leptos 소개](./leptos-beginers/chapter_01.md)
+    - [Project 생성하기](./leptos-beginers/chapter_02.md)
+    - [기초 실습 예제: Counter](./leptos-beginers/chapter_03.md)
+    - [기본 구성요소 살펴보기](./leptos-beginers/chapter_04.md)

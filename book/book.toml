@@ -1,0 +1,13 @@
+[book]
+title = "웹 프로그래밍 개발자를 위한 Rust"
+authors = ["코딩하는오후"]
+language = "ko"
+
+[output.html]
+default-theme="rust"
+no-section-label=true
+git-repository-url = "https://github.com/ohhoonim/course-rust-for-webdev.git"
+
+[output.html.fold]
+enable = true
+level = 0 

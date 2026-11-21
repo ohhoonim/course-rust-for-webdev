@@ -4,19 +4,17 @@
 
 ## 진행중인 과정 
 
-- rust 초급(이론과이해): a01-rust-beginner
-- rust 중급(문제풀이)a02-rust-intermediate
-- Leptos 기본: b01-leptos-csr
+- rust 초급(이론과이해): rust/a01-beginner
+- rust 중급(문제풀이): rust/a02-intermediate
+- Leptos 기본: leptos/b01-intro
 
 ## 예정된 과정 
 
 - Axum
-- Leptos
 
 ## book
- 
-- [z01-rust-grammar](./z01-rust-grammar/README.md) : Rust 프로그래밍 과정  
-- [z02-leptos](./z01-leptos/README.md) : Leptos 과정 (프론트) 
+
+https://ohhoonim.github.io/course-rust-for-webdev/ 
 
 
 ## code

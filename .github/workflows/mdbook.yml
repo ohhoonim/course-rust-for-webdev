@@ -41,14 +41,14 @@ jobs:
         id: pages
         uses: actions/configure-pages@v5
       - name: Build with mdBook
-        # z01-rust-grammar 폴더로 이동하여 빌드를 수행합니다.
+        # book 폴더로 이동하여 빌드를 수행합니다.
         run: mdbook build
-        working-directory: z01-rust-grammar
+        working-directory: book
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # z01-rust-grammar 내부에서 빌드된 book 디렉토리를 업로드 대상으로 지정합니다.
-          path: ./z01-rust-grammar/book
+          # book 내부에서 빌드된 book 디렉토리를 업로드 대상으로 지정합니다.
+          path: ./book/book
 
   # Deployment job
   deploy:
