@@ -1,0 +1,9 @@
+[package]
+name = "b12-wasm-performance"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+console_error_panic_hook.workspace = true
+leptos = { workspace = true, features = ["csr"] }
+web-sys.workspace = true

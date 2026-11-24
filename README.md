@@ -22,4 +22,3 @@ https://ohhoonim.github.io/course-rust-for-webdev/
 - rust: a
 - leptos: b
 - axum: c
-- book: z

@@ -1,0 +1,10 @@
+[package]
+name = "b07-async-resource"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+console_error_panic_hook.workspace = true
+leptos = { workspace = true, features = ["csr"] }
+serde = { workspace = true, features = ["derive"] }
+gloo-net = { workspace = true }

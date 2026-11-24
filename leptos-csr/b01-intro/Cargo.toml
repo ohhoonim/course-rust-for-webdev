@@ -1,8 +1,8 @@
 [package]
-name = "b01-leptos-csr"
+name = "b01-intro"
 version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-console_error_panic_hook = "0.1.7"
-leptos = {version="0.8.23", features=["csr"]}
+console_error_panic_hook.workspace = true
+leptos = { workspace = true, features = ["csr"] }

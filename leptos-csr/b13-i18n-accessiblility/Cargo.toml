@@ -1,0 +1,10 @@
+[package]
+name = "b13-i18n-accessiblility"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+console_error_panic_hook.workspace = true
+gloo-storage.workspace = true
+leptos = { workspace = true, features = ["csr"] }
+web-sys.workspace = true

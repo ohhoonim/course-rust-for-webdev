@@ -95,11 +95,133 @@ dependencies = [
 ]
 
 [[package]]
-name = "b01-leptos-csr"
+name = "b01-intro"
 version = "0.1.0"
 dependencies = [
  "console_error_panic_hook",
  "leptos",
+]
+
+[[package]]
+name = "b02-components"
+version = "0.1.0"
+dependencies = [
+ "console_error_panic_hook",
+ "leptos",
+ "web-sys",
+]
+
+[[package]]
+name = "b03-reactivity"
+version = "0.1.0"
+dependencies = [
+ "console_error_panic_hook",
+ "leptos",
+]
+
+[[package]]
+name = "b04-control-flow"
+version = "0.1.0"
+dependencies = [
+ "console_error_panic_hook",
+ "leptos",
+]
+
+[[package]]
+name = "b05-form-event"
+version = "0.1.0"
+dependencies = [
+ "console_error_panic_hook",
+ "leptos",
+]
+
+[[package]]
+name = "b06-routing"
+version = "0.1.0"
+dependencies = [
+ "console_error_panic_hook",
+ "leptos",
+ "leptos_router",
+]
+
+[[package]]
+name = "b07-async-resource"
+version = "0.1.0"
+dependencies = [
+ "console_error_panic_hook",
+ "gloo-net 0.8.0",
+ "leptos",
+ "serde",
+]
+
+[[package]]
+name = "b08-state-management"
+version = "0.1.0"
+dependencies = [
+ "console_error_panic_hook",
+ "gloo-net 0.8.0",
+ "gloo-storage",
+ "gloo-timers",
+ "leptos",
+]
+
+[[package]]
+name = "b09-styling"
+version = "0.1.0"
+dependencies = [
+ "console_error_panic_hook",
+ "leptos",
+ "web-sys",
+]
+
+[[package]]
+name = "b10-animation"
+version = "0.1.0"
+dependencies = [
+ "console_error_panic_hook",
+ "gloo-timers",
+ "leptos",
+]
+
+[[package]]
+name = "b11-testing"
+version = "0.1.0"
+dependencies = [
+ "console_error_panic_hook",
+ "leptos",
+]
+
+[[package]]
+name = "b12-wasm-performance"
+version = "0.1.0"
+dependencies = [
+ "console_error_panic_hook",
+ "leptos",
+ "web-sys",
+]
+
+[[package]]
+name = "b13-i18n-accessiblility"
+version = "0.1.0"
+dependencies = [
+ "console_error_panic_hook",
+ "gloo-storage",
+ "leptos",
+ "web-sys",
+]
+
+[[package]]
+name = "b14-js-interop"
+version = "0.1.0"
+dependencies = [
+ "console_error_panic_hook",
+ "gloo-events",
+ "gloo-timers",
+ "js-sys",
+ "leptos",
+ "wasm-bindgen",
+ "wasm-bindgen-futures",
+ "web-sys",
 ]
 
 [[package]]
@@ -473,6 +595,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "gloo-events"
+version = "0.3.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5d378d6dc490f9f6ea823f9eced8d2eb2bc410ce75e56f63e13f5ac9cc70b091"
+dependencies = [
+ "wasm-bindgen",
+ "web-sys",
+]
+
+[[package]]
 name = "gloo-net"
 version = "0.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -481,7 +613,7 @@ dependencies = [
  "futures-channel",
  "futures-core",
  "futures-sink",
- "gloo-utils",
+ "gloo-utils 0.2.0",
  "http",
  "js-sys",
  "pin-project",
@@ -494,10 +626,71 @@ dependencies = [
 ]
 
 [[package]]
+name = "gloo-net"
+version = "0.8.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ca0d014b3eb3645bf8e44000afb0ed0faf33b42bec5f463fa9d233b7da45feac"
+dependencies = [
+ "futures-channel",
+ "futures-core",
+ "futures-sink",
+ "gloo-utils 0.3.1",
+ "http",
+ "js-sys",
+ "pin-project",
+ "serde",
+ "serde_json",
+ "thiserror 2.0.21",
+ "wasm-bindgen",
+ "wasm-bindgen-futures",
+ "web-sys",
+]
+
+[[package]]
+name = "gloo-storage"
+version = "0.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e3b37ab45f56a81fcddd15c80727dc95bdacae7efbb9221598c26604a405158e"
+dependencies = [
+ "gloo-utils 0.3.1",
+ "js-sys",
+ "serde",
+ "serde_json",
+ "thiserror 2.0.21",
+ "wasm-bindgen",
+ "web-sys",
+]
+
+[[package]]
+name = "gloo-timers"
+version = "0.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a4460540da666acdb5722b2a62ac47d18f627fcfc0c728d04dc7226b3f6d40a7"
+dependencies = [
+ "futures-channel",
+ "futures-core",
+ "js-sys",
+ "wasm-bindgen",
+]
+
+[[package]]
 name = "gloo-utils"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0b5555354113b18c547c1d3a98fbf7fb32a9ff4f6fa112ce823a21641a0ba3aa"
+dependencies = [
+ "js-sys",
+ "serde",
+ "serde_json",
+ "wasm-bindgen",
+ "web-sys",
+]
+
+[[package]]
+name = "gloo-utils"
+version = "0.3.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b49e445aecd7ad851e4a3704f370f53ae7b267ace62d17be3ec4fac5024eec0e"
 dependencies = [
  "js-sys",
  "serde",
@@ -815,6 +1008,41 @@ dependencies = [
  "server_fn_macro",
  "syn 3.0.9",
  "uuid",
+]
+
+[[package]]
+name = "leptos_router"
+version = "0.8.17"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f92787ebcb5f25af6a67513dacfd75cbffce5bda3f361e2e947c3fc4e3adc14b"
+dependencies = [
+ "any_spawner",
+ "either_of",
+ "futures",
+ "gloo-net 0.6.0",
+ "js-sys",
+ "leptos",
+ "leptos_router_macro",
+ "or_poisoned",
+ "reactive_graph",
+ "rustc_version",
+ "send_wrapper",
+ "tachys",
+ "thiserror 2.0.21",
+ "url",
+ "wasm-bindgen",
+ "web-sys",
+]
+
+[[package]]
+name = "leptos_router_macro"
+version = "0.8.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1bb5c81012dcab0d5cc032a2da0a364a18ce74a0fbeb88f091e9b53a0679bc85"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.119",
 ]
 
 [[package]]
@@ -1262,7 +1490,7 @@ dependencies = [
  "const-str",
  "const_format",
  "futures",
- "gloo-net",
+ "gloo-net 0.6.0",
  "http",
  "js-sys",
  "or_poisoned",
