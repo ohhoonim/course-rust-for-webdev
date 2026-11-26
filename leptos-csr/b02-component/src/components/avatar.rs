@@ -31,11 +31,11 @@ pub fn Avatar(
         .to_uppercase();
 
     view! {
-        <div style=format!(
-            "width: {px}; height: {px}; border-radius: 50%; display: inline-flex; \
-             align-items: center; justify-content: center; overflow: hidden; \
-             background: #6366f1; color: white; font-size: {font}; font-weight: 600; margin: 4px;"
-        )>
+        <div class="avatar"
+            style:width=px
+            style:height=px
+            style:font-color=font
+        >
             {if let Some(url) = image_url {
                 view! { <img src=url alt=name.clone() style="width: 100%; height: 100%; object-fit: cover;"/> }.into_any()
             } else {

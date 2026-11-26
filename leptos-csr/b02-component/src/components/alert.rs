@@ -24,16 +24,15 @@ pub fn Alert(
 
     view! {
         <Show when=move || !dismissed.get()>
-            <div style=format!(
-                "display: flex; align-items: center; padding: 10px 14px; background: {bg}; \
-                 border-left: 4px solid {border}; border-radius: 6px; margin: 8px 0; gap: 8px;"
-            )>
+            <div class="alert"
+                style:border-left-color=border
+                style:background-color=bg
+            >
                 <span>{icon}</span>
                 <span style="flex: 1;">{message.clone()}</span>
                 {dismissible.then(|| view! {
-                    <button
+                    <button class="btn"
                         on:click=move |_| set_dismissed.set(true)
-                        style="background: none; border: none; cursor: pointer; font-size: 1rem; color: #6b7280;"
                     >
                         "x"
                     </button>

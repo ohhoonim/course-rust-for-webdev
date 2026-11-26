@@ -9,10 +9,6 @@ pub enum BadgeColor {
     Gray,
 }
 
-/// Explains the `badge` step in this lesson.
-///
-/// What it does: renders the `Badge` component for one focused part of the lesson UI.
-/// Why it matters: Keeping this UI section isolated makes the signal, context, action, or routing pattern easier to study.
 #[component]
 pub fn Badge(
     #[prop(into)] text: String,
@@ -27,10 +23,10 @@ pub fn Badge(
     };
 
     view! {
-        <span style=format!(
-            "display: inline-block; padding: 2px 8px; border-radius: 999px; \
-             background: {bg}; color: {fg}; font-size: 0.78rem; font-weight: 500; margin: 2px;"
-        )>
+        <span class="badge"
+            style:background=bg 
+            style:color=fg
+        >
             {text}
         </span>
     }
