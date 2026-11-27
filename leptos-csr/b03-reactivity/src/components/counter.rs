@@ -10,14 +10,14 @@ pub fn Counter() -> impl IntoView {
     });
 
     view! {
-        <section style="padding: 1rem; border: 1px solid #e2e8f0; border-radius: 8px; margin: 8px 0;">
-            <h3>"Counter - signal + memo + effect"</h3>
+        <section>
+            <h3>"계수기 - signal + memo + effect"</h3>
             <p>"Count: " <strong>{count}</strong></p>
             <p>"Doubled (Memo): " <strong>{doubled}</strong></p>
-            <button style="padding: 6px 12px; margin: 4px;" on:click=move |_| set_count.update(|n| *n += 1)>"+"</button>
-            <button style="padding: 6px 12px; margin: 4px;" on:click=move |_| set_count.update(|n| *n -= 1)>"-"</button>
-            <button style="padding: 6px 12px; margin: 4px;" on:click=move |_| set_count.set(0)>"Reset"</button>
-            <p style="font-size: 0.8rem; color: #6b7280;">"Open DevTools console to see effect logs."</p>
+            <button on:click=move |_| set_count.update(|n| *n += 1)>"+"</button>
+            <button  on:click=move |_| set_count.update(|n| *n -= 1)>"-"</button>
+            <button  on:click=move |_| set_count.set(0)>"Reset"</button>
+            <p>"Open DevTools console to see effect logs."</p>
         </section>
     }
 }

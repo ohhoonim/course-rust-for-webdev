@@ -15,11 +15,10 @@ pub fn WordCounter() -> impl IntoView {
     });
 
     view! {
-        <section style="padding: 1rem; border: 1px solid #e2e8f0; border-radius: 8px; margin: 8px 0;">
-            <h3>"Word Counter - multiple memos from one signal"</h3>
+        <section>
+            <h3>"단어 계수기 - multiple memos from one signal"</h3>
             <textarea
-                style="width: 100%; height: 80px; padding: 8px; box-sizing: border-box;"
-                placeholder="Type or paste text here..."
+                placeholder="텍스트를 입력하세요..."
                 prop:value=text
                 on:input:target=move |event| set_text.set(event.target().value())
             />

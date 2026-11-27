@@ -22,25 +22,19 @@ pub fn ColorMixer() -> impl IntoView {
                             setter.set(next);
                         }
                     }
-                    style="flex: 1;"
                 />
-                <code style="width: 2.5rem; text-align: right;">{move || value.get().to_string()}</code>
+                <code>{move || value.get().to_string()}</code>
             </label>
         }
     };
 
     view! {
-        <section style="padding: 1rem; border: 1px solid #e2e8f0; border-radius: 8px; margin: 8px 0;">
+        <section>
             <h3>"Color Mixer - derived signal from three sources"</h3>
             {slider("R", r, set_r)}
             {slider("G", g, set_g)}
             {slider("B", b, set_b)}
-            <div style=move || format!(
-                "margin-top: 12px; height: 60px; border-radius: 8px; background: {}; \
-                 display: flex; align-items: center; justify-content: center; \
-                 font-weight: 600; color: white; text-shadow: 0 1px 2px rgba(0,0,0,0.5);",
-                color_css()
-            )>
+            <div class="mixer" style:background=color_css>
                 {hex}
             </div>
         </section>

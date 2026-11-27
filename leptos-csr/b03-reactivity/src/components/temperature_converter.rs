@@ -6,14 +6,13 @@ pub fn TemperatureConverter() -> impl IntoView {
     let fahrenheit = move || celsius.get() * 9.0 / 5.0 + 32.0;
 
     view! {
-        <section style="padding: 1rem; border: 1px solid #e2e8f0; border-radius: 8px; margin: 8px 0;">
-            <h3>"Temperature Converter - derived signal"</h3>
-            <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+        <section>
+            <h3>"온도 변환기 - derived signal"</h3>
+            <div class="temperature" >
                 <label>
-                    "Celsius: "
+                    "섭씨(Celsius): "
                     <input
                         type="number"
-                        style="width: 80px; padding: 4px;"
                         prop:value=move || celsius.get().to_string()
                         on:input:target=move |event| {
                             if let Ok(value) = event.target().value().parse::<f64>() {
@@ -24,10 +23,9 @@ pub fn TemperatureConverter() -> impl IntoView {
                 </label>
                 <span>"="</span>
                 <label>
-                    "Fahrenheit: "
+                    "화씨(Fahrenheit): "
                     <input
                         type="number"
-                        style="width: 80px; padding: 4px;"
                         prop:value=move || format!("{:.1}", fahrenheit())
                         on:input:target=move |event| {
                             if let Ok(value) = event.target().value().parse::<f64>() {
