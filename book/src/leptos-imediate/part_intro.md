@@ -4,7 +4,7 @@
 
 - **Components**: props, children
 - **Reactivity**: signal, effect, memo
-- **Control Flow**: Show, For
+- **Iteration과 Control Flow**: Show, For
 - **Forms and Events**: event, control input, validation
 - **Routing**: Router, Routes, params
 - **Async and Resource**: resource, Suspense, Transition

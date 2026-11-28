@@ -1,12 +1,11 @@
 mod components;
 
-use components::*; 
+use components::*;
 use leptos::prelude::*;
 
 #[component]
 pub fn App() -> impl IntoView {
     view! {
-        <style>{STYLE}</style>
         <main>
             <h1>"Control Flow"</h1>
             <LoginGate/>
@@ -21,25 +20,3 @@ pub fn App() -> impl IntoView {
         </main>
     }
 }
-
-const STYLE: &str = r#"
-body { margin: 0; font-family: system-ui, sans-serif; background: #f8fafc; color: #17202a; }
-main { max-width: 860px; margin: 0 auto; padding: 32px 16px; }
-.panel { background: white; border: 1px solid #d9dee8; border-radius: 8px; padding: 18px; margin: 14px 0; }
-.stack { display: grid; gap: 10px; max-width: 360px; }
-.row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-.between { justify-content: space-between; }
-input, button { font: inherit; padding: 8px 10px; border-radius: 6px; border: 1px solid #b9c1d0; }
-button { background: #1f6feb; color: white; cursor: pointer; border-color: #1f6feb; }
-button.danger { background: #dc2626; border-color: #dc2626; }
-.list { padding: 0; list-style: none; display: grid; gap: 8px; }
-.list li { padding: 8px; background: #f8fafc; border-radius: 6px; }
-.tabs { display: flex; gap: 8px; margin-bottom: 10px; }
-.tab { background: #e5e7eb; color: #111827; border-color: #d1d5db; }
-.tab.active { background: #1f6feb; color: white; }
-.user-card { display: flex; gap: 12px; align-items: center; padding: 10px; border: 1px solid #e5e7eb; border-radius: 8px; margin: 8px 0; }
-.avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
-.placeholder { display: grid; place-items: center; background: #4f46e5; color: white; font-weight: 700; }
-.success { background: #ecfdf5; color: #065f46; padding: 10px; border-radius: 6px; }
-.error { background: #fef2f2; color: #991b1b; padding: 10px; border-radius: 6px; }
-"#;

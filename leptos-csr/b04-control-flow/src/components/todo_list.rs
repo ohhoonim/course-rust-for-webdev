@@ -6,10 +6,6 @@ pub struct Todo {
     title: String,
 }
 
-/// Explains the `todo list` step in this lesson.
-///
-/// What it does: renders the `TodoList` component for one focused part of the lesson UI.
-/// Why it matters: Keeping this UI section isolated makes the signal, context, action, or routing pattern easier to study.
 #[component]
 pub fn TodoList() -> impl IntoView {
     let draft = RwSignal::new(String::new());
@@ -24,8 +20,6 @@ pub fn TodoList() -> impl IntoView {
         },
     ]);
 
-    // Keys must be unique and stable, so ids come from a counter that only ever goes up.
-    // (Using `items.len() + 1` would reuse an id after a delete, and `<For/>` would skip the new row.)
     let next_id = RwSignal::new(3_u64);
 
     let add_todo = move || {
